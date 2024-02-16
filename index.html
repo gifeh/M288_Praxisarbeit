@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Number Game</h1>
+  <p>Press the corresponding number key to continue.</p>
+  <div id="score">Score: 0</div>
+  <div id="timer" style="display: none;">Time left: 4.0</div>
+  <div id="number">?</div>
+  <div id="message"></div>
+  <div class="button-container">
+    <button id="startButton">Start</button>
+    <button id="restartButton" style="display: none;">Restart</button>
+    <button id="leaderboardButton">Leaderboard</button>
+  </div>
+  <div class="button-container" id="smartphoneInput">
+    <button id="numberButton1">1</button>
+    <button id="numberButton2">2</button>
+    <button id="numberButton3">3</button>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
