@@ -1,29 +1,82 @@
+<?php
+session_start();
+
+// Datenbankverbindung herstellen
+$config = parse_ini_file('settings.ini');
+$dsn = 'mysql:host=' . $config['server'] . ';dbname=' . $config['dbname'];
+$username = $config['dbuser'];
+$password = $config['dbpass'];
+
+try {
+    $db = new PDO($dsn, $username, $password);
+} catch (PDOException $e) {
+    die('Verbindung fehlgeschlagen: ' . $e->getMessage());
+}
+
+// Funktion zur Abfrage der Benutzernamen aus der Datenbank
+function getUserNames($db) {
+    $stmt = $db->query('SELECT userName FROM Leaderboard');
+    $userNames = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return $userNames;
+}
+
+// Funktion zur Aktualisierung des Leaderboards mit einem neuen Highscore
+function updateLeaderboard($db, $userName, $score) {
+    $stmt = $db->prepare('UPDATE Leaderboard SET userScore = :score, date = NOW() WHERE userName = :name AND userScore < :score');
+    $stmt->bindParam(':name', $userName);
+    $stmt->bindParam(':score', $score);
+    $stmt->execute();
+}
+
+// Überprüfen, ob ein Benutzer angemeldet ist
+if (isset($_SESSION['userName'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['score'])) {
+        // Wenn der Benutzer verloren hat und einen Score übermittelt hat, aktualisieren wir das Leaderboard
+        $score = intval($_POST['score']);
+        updateLeaderboard($db, $_SESSION['userName'], $score);
+        unset($_SESSION['userName']); // Abmelden des Benutzers nach dem Spiel
+    }
+} else {
+    // Benutzer ist nicht angemeldet, zeige das Login-Formular an
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'])) {
+        // Überprüfen, ob der eingegebene Benutzername gültig ist
+        $userNames = getUserNames($db);
+        $inputUserName = $_POST['userName'];
+        if (in_array($inputUserName, $userNames)) {
+            // Benutzername ist gültig, speichere ihn in der Sitzung und leite zum Spiel weiter
+            $_SESSION['userName'] = $inputUserName;
+            header('Location: game.php');
+            exit;
+        } else {
+            $errorMessage = 'Ungültiger Benutzername!';
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Number Game</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/assets/style/styles.css">
 </head>
 <body>
   <h1>Number Game</h1>
-  <p>Press the corresponding number key to continue.</p>
-  <div id="score">Score: 0</div>
-  <div id="timer" style="display: none;">Time left: 4.0</div>
-  <div id="number">?</div>
-  <div id="message"></div>
-  <div class="button-container">
-    <button id="startButton">Start</button>
-    <button id="restartButton" style="display: none;">Restart</button>
-    <button id="leaderboardButton">Leaderboard</button>
-  </div>
-  <div class="button-container" id="smartphoneInput">
-    <button id="numberButton1">1</button>
-    <button id="numberButton2">2</button>
-    <button id="numberButton3">3</button>
-  </div>
-  
-  <script src="script.js"></script>
+  <?php if(isset($errorMessage)) echo "<p>$errorMessage</p>"; ?>
+  <form method="post">
+    <label for="userName">Select your username:</label>
+    <select name="userName" id="userName">
+      <?php
+      $userNames = getUserNames($db);
+      foreach ($userNames as $userName) {
+          echo "<option value=\"$userName\">$userName</option>";
+      }
+      ?>
+    </select>
+    <button type="submit">Login</button>
+  </form>
 </body>
 </html>
