@@ -7,6 +7,7 @@ if (!isset($_SESSION['userName'])) {
     exit;
 }
 
+// Hier kommt der Spiel-Code...
 ?>
 
 <!DOCTYPE html>
