@@ -66,7 +66,7 @@ if (isset($_SESSION['userName'])) {
 <body>
   <h1>Number Game</h1>
   <?php if(isset($errorMessage)) echo "<p>$errorMessage</p>"; ?>
-  <form method="post">
+  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label for="userName">Select your username:</label>
     <select name="userName" id="userName">
       <?php
@@ -80,3 +80,4 @@ if (isset($_SESSION['userName'])) {
   </form>
 </body>
 </html>
+
