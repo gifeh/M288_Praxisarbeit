@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Datenbankverbindung herstellen
 $config = parse_ini_file('settings.ini');
 $dsn = 'mysql:host=' . $config['server'] . ';dbname=' . $config['dbname'];
@@ -13,19 +12,34 @@ try {
     die('Verbindung fehlgeschlagen: ' . $e->getMessage());
 }
 
+
+
+
+
+
 // Funktion zur Abfrage der Benutzernamen aus der Datenbank
 function getUserNames($db) {
-    $stmt = $db->query('SELECT userName FROM Leaderboard');
+    $stmt = $db->query('SELECT userName FROM leaderboard');
     $userNames = $stmt->fetchAll(PDO::FETCH_COLUMN);
     return $userNames;
 }
 
 // Funktion zur Aktualisierung des Leaderboards mit einem neuen Highscore
 function updateLeaderboard($db, $userName, $score) {
-    $stmt = $db->prepare('UPDATE Leaderboard SET userScore = :score, date = NOW() WHERE userName = :name AND userScore < :score');
+    // Zuerst den aktuellen Highscore des Benutzers abrufen
+    $stmt = $db->prepare('SELECT userScore FROM leaderboard WHERE userName = :name');
     $stmt->bindParam(':name', $userName);
-    $stmt->bindParam(':score', $score);
     $stmt->execute();
+    $currentScore = $stmt->fetchColumn();
+
+    // Überprüfen, ob der neue Score größer ist als der aktuelle Highscore
+    if ($score > $currentScore) {
+        // Wenn ja, aktualisieren Sie den Highscore des Benutzers in der Datenbank
+        $stmt = $db->prepare('UPDATE leaderboard SET userScore = :score, date = NOW() WHERE userName = :name');
+        $stmt->bindParam(':name', $userName);
+        $stmt->bindParam(':score', $score);
+        $stmt->execute();
+    }
 }
 
 // Überprüfen, ob ein Benutzer angemeldet ist
@@ -68,16 +82,17 @@ if (isset($_SESSION['userName'])) {
   <?php if(isset($errorMessage)) echo "<p>$errorMessage</p>"; ?>
   <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label for="userName">Select your username:</label>
-    <select name="userName" id="userName">
-      <?php
-      $userNames = getUserNames($db);
-      foreach ($userNames as $userName) {
-          echo "<option value=\"$userName\">$userName</option>";
-      }
-      ?>
+    <select name="userName" id="userName" style="width: 200px; height: 30px;">
+        <?php
+        $userNames = getUserNames($db);
+        foreach ($userNames as $userName) {
+            echo "<option value=\"$userName\">$userName</option>";
+        }
+        ?>
     </select>
+    <h2>dsdededed</h2>
     <button type="submit">Login</button>
-  </form>
+</form>
 </body>
 </html>
 
