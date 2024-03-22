@@ -7,7 +7,7 @@ $username = $config['dbuser'];
 $password = $config['dbpass'];
 
 try {
-    $db = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO($dsn, $username, $password);
 } catch (PDOException $e) {
     die('Verbindung fehlgeschlagen: ' . $e->getMessage());
 }
