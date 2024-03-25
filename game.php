@@ -6,25 +6,23 @@ if (!isset($_SESSION['userName'])) {
     header('Location: index.php');
     exit;
 }
-
-// Funktion zur Anzeige des aktuellen Benutzers und seines Highscores
-function displayUserDetails($db) {
-  // Benutzernamen des aktuellen Benutzers abrufen
-  $userName = $_SESSION['userName'];
-
-  // Den Highscore des Benutzers aus der Datenbank abrufen
+// Funktion zur Abfrage des Highscores des aktuellen Benutzers
+function getCurrentUserHighscore($db, $userName) {
   $stmt = $db->prepare('SELECT userScore FROM leaderboard WHERE userName = :name');
   $stmt->bindParam(':name', $userName);
   $stmt->execute();
-  $userScore = $stmt->fetchColumn();
-
-  // Anzeige des Benutzernamens und des Highscores
-  echo "<p>Current User: $userName</p>";
-  echo "<p>Highscore: $userScore</p>";
+  $highscore = $stmt->fetchColumn();
+  return $highscore;
 }
 
-// Aufruf der Funktion, um Benutzerdetails anzuzeigen und übergeben Sie der Funktion den $db-Variable
-displayUserDetails($db);
+// Aktuellen Benutzer und Highscore abrufen
+$currentUserName = $_SESSION['userName'];
+$currentUserHighscore = getCurrentUserHighscore($db, $currentUserName);
+
+// Ausgabe des Benutzernamens und des Highscores
+echo "<p>Angemeldeter Benutzer: $currentUserName</p>";
+echo "<p>Highscore: $currentUserHighscore</p>";
+
 
 ?>
 
