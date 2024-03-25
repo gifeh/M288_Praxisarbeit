@@ -13,8 +13,26 @@ try {
     die('Verbindung fehlgeschlagen: ' . $e->getMessage());
 }
 
+// Überprüfen, ob ein Benutzer angemeldet ist und Weiterleitung zum Spiel
+if (isset($_SESSION['userName'])) {
+    header('Location: game.php');
+    exit;
+}
 
-
+// Überprüfen, ob das Anmeldeformular gesendet wurde
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'])) {
+    // Überprüfen, ob der eingegebene Benutzername gültig ist
+    $userNames = getUserNames($db);
+    $inputUserName = $_POST['userName'];
+    if (in_array($inputUserName, $userNames)) {
+        // Benutzername ist gültig, speichere ihn in der Sitzung und leite zum Spiel weiter
+        $_SESSION['userName'] = $inputUserName;
+        header('Location: game.php');
+        exit;
+    } else {
+        $errorMessage = 'Ungültiger Benutzername!';
+    }
+}
 
 // Funktion zur Abfrage der Benutzernamen aus der Datenbank
 function getUserNames($db) {
@@ -22,50 +40,6 @@ function getUserNames($db) {
     $userNames = $stmt->fetchAll(PDO::FETCH_COLUMN);
     return $userNames;
 }
-
-// Funktion zur Aktualisierung des Leaderboards mit einem neuen Highscore
-function updateLeaderboard($db, $userName, $score) {
-    // Zuerst den aktuellen Highscore des Benutzers abrufen
-    $stmt = $db->prepare('SELECT userScore FROM leaderboard WHERE userName = :name');
-    $stmt->bindParam(':name', $userName);
-    $stmt->execute();
-    $currentScore = $stmt->fetchColumn();
-
-    // Überprüfen, ob der neue Score größer ist als der aktuelle Highscore
-    if ($score > $currentScore) {
-        // Wenn ja, aktualisieren Sie den Highscore des Benutzers in der Datenbank
-        $stmt = $db->prepare('UPDATE leaderboard SET userScore = :score, date = NOW() WHERE userName = :name');
-        $stmt->bindParam(':name', $userName);
-        $stmt->bindParam(':score', $score);
-        $stmt->execute();
-    }
-}
-
-// Überprüfen, ob ein Benutzer angemeldet ist
-if (isset($_SESSION['userName'])) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['score'])) {
-        // Wenn der Benutzer verloren hat und einen Score übermittelt hat, aktualisieren wir das Leaderboard
-        $score = intval($_POST['score']);
-        updateLeaderboard($db, $_SESSION['userName'], $score);
-        unset($_SESSION['userName']); // Abmelden des Benutzers nach dem Spiel
-    }
-} else {
-    // Benutzer ist nicht angemeldet, zeige das Login-Formular an
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'])) {
-        // Überprüfen, ob der eingegebene Benutzername gültig ist
-        $userNames = getUserNames($db);
-        $inputUserName = $_POST['userName'];
-        if (in_array($inputUserName, $userNames)) {
-            // Benutzername ist gültig, speichere ihn in der Sitzung und leite zum Spiel weiter
-            $_SESSION['userName'] = $inputUserName;
-            header('Location: game.php');
-            exit;
-        } else {
-            $errorMessage = 'Ungültiger Benutzername!';
-        }
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -89,9 +63,7 @@ if (isset($_SESSION['userName'])) {
         }
         ?>
     </select>
-    <h2>dsdededed</h2>
     <button type="submit">Login</button>
-</form>
+  </form>
 </body>
 </html>
-
