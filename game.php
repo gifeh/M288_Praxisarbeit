@@ -27,7 +27,7 @@ if (!isset($_SESSION['userName'])) {
   <div class="button-container">
     <button id="startButton">Start</button>
     <button id="restartButton" style="display: none;">Restart</button>
-    <button id="leaderboardButton" onclick="submitScore()">Leaderboard</button>
+    <button id="leaderboardButton" onclick="location.href='leaderboard.php';"</button>
   </div>
   <div class="button-container" id="smartphoneInput">
     <button id="numberButton1">1</button>
