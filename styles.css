@@ -27,3 +27,33 @@ body {
   justify-content: space-around;
   gap: 300px;
 }
+
+h1 {
+  text-align: center;
+}
+
+table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px 20px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-container {
+  width: 80%;
+  margin: 0 auto;
+  overflow-x: auto;
+  white-space: nowrap;
+}

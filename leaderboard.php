@@ -23,34 +23,38 @@ $leaderboard = getLeaderboard($db);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaderboard</title>
   <link rel="stylesheet" href="/assets/style/styles.css">
+  <link rel="stylesheet" href="/assets/style/leaderboard.css">
 </head>
 <body>
   <h1>Leaderboard</h1>
-  <table>
-    <tr>
-      <th>Rank</th>
-      <th>User</th>
-      <th>Score</th>
-      <th>Date</th>
-    </tr>
-    <?php
-    $rank = 1;
-    foreach ($leaderboard as $row) {
-        echo "<tr>";
-        echo "<td>{$rank}</td>";
-        echo "<td>{$row['userName']}</td>";
-        echo "<td>{$row['userScore']}</td>";
-        echo "<td>{$row['date']}</td>";
-        echo "</tr>";
-        $rank++;
-    }
-    ?>
-  </table>
+  <div class="leaderboard-container">
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>User</th>
+        <th>Score</th>
+        <th>Date</th>
+      </tr>
+      <?php
+      $rank = 1;
+      foreach ($leaderboard as $row) {
+          echo "<tr>";
+          echo "<td>{$rank}</td>";
+          echo "<td>{$row['userName']}</td>";
+          echo "<td>{$row['userScore']}</td>";
+          echo "<td>{$row['date']}</td>";
+          echo "</tr>";
+          $rank++;
+      }
+      ?>
+    </table>
+  </div>
 </body>
 </html>
+
