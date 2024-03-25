@@ -65,7 +65,24 @@ function gameOverHandler(reason) {
     document.getElementById('message').textContent = 'Wrong number! Your final score: ' + score;
     }
     document.getElementById('restartButton').style.display = 'inline';
+
+    submitScore(score);
 }
+
+function submitScore(score) {
+    // Übermittelte den Score des Spielers an das Spiel-Skript
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "index.php", true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Erfolg, zeige die Antwort (z. B. Erfolgsmeldung) an
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send("score=" + score);
+}
+
 
 function updateScore() {
     document.getElementById('score').textContent = 'Score: ' + score;
