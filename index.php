@@ -16,10 +16,10 @@ try {
 
 
 
-if (isset($_SESSION['userName']) && isset($_GET['logout'])) {
-    unset($_SESSION['userName']);
-    session_destroy();
-}
+
+unset($_SESSION['userName']);
+session_destroy();
+
 
 // Funktion zur Abfrage der Benutzernamen aus der Datenbank
 function getUserNames($db) {
