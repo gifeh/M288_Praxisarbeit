@@ -1,8 +1,6 @@
 <?php
 session_start();
-header("Cache-Control: no-store, no-cache, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
+
 // Datenbankverbindung herstellen
 $config = parse_ini_file('settings.ini');
 $dsn = 'mysql:host=' . $config['server'] . ';dbname=' . $config['dbname'];
@@ -18,7 +16,10 @@ try {
 
 
 
-
+if (isset($_SESSION['userName']) && isset($_GET['logout'])) {
+    unset($_SESSION['userName']);
+    session_destroy();
+}
 
 // Funktion zur Abfrage der Benutzernamen aus der Datenbank
 function getUserNames($db) {
