@@ -14,10 +14,6 @@ try {
 }
 
 
-function executeOncePerPageLoad() {
-    global $db;
-    unset($_SESSION['userName']);
-}
 
 
 // Funktion zur Abfrage der Benutzernamen aus der Datenbank
