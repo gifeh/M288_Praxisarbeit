@@ -1,6 +1,18 @@
 <?php
 session_start();
 
+$config = parse_ini_file('settings.ini');
+$dsn = 'mysql:host=' . $config['server'] . ';dbname=' . $config['dbname'];
+$username = $config['dbuser'];
+$password = $config['dbpass'];
+
+try {
+    $db = new PDO($dsn, $username, $password);
+} catch (PDOException $e) {
+    die('Verbindung fehlgeschlagen: ' . $e->getMessage());
+}
+
+
 // Überprüfen, ob ein Benutzer angemeldet ist, sonst zurück zum Login
 if (!isset($_SESSION['userName'])) {
     header('Location: index.php');
