@@ -23,7 +23,7 @@ function displayUserDetails($db) {
   echo "<p>Highscore: $userScore</p>";
 }
 
-// Aufruf der Funktion, um Benutzerdetails anzuzeigen
+// Aufruf der Funktion, um Benutzerdetails anzuzeigen und übergeben Sie der Funktion den $db-Variable
 displayUserDetails($db);
 
 ?>
