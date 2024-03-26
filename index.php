@@ -39,27 +39,7 @@ function getUserNames($db) {
 unset($_SESSION['userName']);
 
 
-function updateLeaderboard($db, $userName, $score) {
-    try {
-        // Zuerst den aktuellen Highscore des Benutzers abrufen
-        $stmt = $db->prepare('SELECT userScore FROM leaderboard WHERE userName = :name');
-        $stmt->bindParam(':name', $userName);
-        $stmt->execute();
-        $currentScore = $stmt->fetchColumn();
 
-        // Überprüfen, ob der neue Score größer ist als der aktuelle Highscore
-        if ($score > $currentScore || $currentScore === false) {
-            // Wenn ja, aktualisieren Sie den Highscore des Benutzers in der Datenbank
-            $updateStmt = $db->prepare('UPDATE leaderboard SET userScore = :score, date = NOW() WHERE userName = :name');
-            $updateStmt->bindParam(':name', $userName);
-            $updateStmt->bindParam(':score', $score);
-            $updateStmt->execute();
-        }
-    } catch (PDOException $e) {
-        // Fehlerbehandlung: Protokollieren Sie den Fehler oder geben Sie eine Fehlermeldung aus
-        echo "Fehler beim Aktualisieren des Highscores: " . $e->getMessage();
-    }
-}
 
 
 
