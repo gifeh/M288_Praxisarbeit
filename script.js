@@ -70,6 +70,22 @@ function gameOverHandler(reason) {
 }
 
 
+function callUpdateHighscore() {
+    $.ajax({
+        url: 'game.php',
+        type: 'post',
+        data: { action: 'updateHighscore' }, // Zusätzliche Daten, falls benötigt
+        success: function(response) {
+            // Hier kannst du die Antwort verarbeiten, falls benötigt
+            console.log('Highscore erfolgreich aktualisiert');
+        },
+        error: function(xhr, status, error) {
+            // Hier kannst du Fehlerhandhabung implementieren, falls benötigt
+            console.error('Fehler beim Aktualisieren des Highscores:', error);
+        }
+    });
+}
+
 
 function updateScore() {
     document.getElementById('score').textContent = 'Score: ' + score;
