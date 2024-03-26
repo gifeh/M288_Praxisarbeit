@@ -24,6 +24,8 @@ function getCurrentUserHighscore($db, $userName) {
     $stmt->bindParam(':name', $userName);
     $stmt->execute();
     $highscore = $stmt->fetchColumn();
+    $_SESSION['highscore'] = $highscore;
+
     return $highscore;
 }
 
@@ -43,7 +45,8 @@ $currentUserHighscore = getCurrentUserHighscore($db, $currentUserName);
 
 // Benutzer hat neuen Highscore erreicht
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['score'])) {
-    $score = intval($_POST['score']);
+
+  $score = intval($_POST['score']);
     if ($score > $currentUserHighscore) {
         updateCurrentUserHighscore($db, $currentUserName, $score);
     }
@@ -82,18 +85,19 @@ echo "<p>Highscore: $currentUserHighscore</p>";
   
   <script src="/assets/scripts/script.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('restartButton').addEventListener('click', function() {
-        const score = document.getElementById('score').textContent.replace('Score: ', '');
-        // Send score to game.php for updating highscore
-        fetch('game.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: 'score=' + score
-        });
+    function updateHichScore() {
+      const score = document.getElementById('score').textContent.replace('Score: ', '');
+      // Send score to game.php for updating highscore
+      fetch('game.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'score=' + score
       });
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('restartButton').addEventListener('click', updateHichScore, false);
     });
   </script>
 </body>

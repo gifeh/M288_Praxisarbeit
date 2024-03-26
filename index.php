@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'])) {
     if (in_array($inputUserName, $userNames)) {
         // Benutzername ist gültig, speichere ihn in der Sitzung und leite zum Spiel weiter
         $_SESSION['userName'] = $inputUserName;
+        
         header('Location: game.php');
         exit;
     } else {

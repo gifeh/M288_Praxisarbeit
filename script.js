@@ -24,12 +24,12 @@ function displayNewNumber() {
     document.getElementById('number').classList.remove('correct'); // Remove 'correct' class if it exists
     clearInterval(timer); // Clear previous timer
     timer = setInterval(() => {
-    timeLimit -= 100 // Decrease time limit
-    updateTimer();
-    if (timeLimit <= 0) {
-        clearInterval(timer);
-        gameOverHandler('tooSlow');
-    }
+        timeLimit -= 100 // Decrease time limit
+        updateTimer();
+        if (timeLimit <= 0) {
+            clearInterval(timer);
+            gameOverHandler('tooSlow');
+        }
     }, 100);
 }
 
@@ -37,21 +37,21 @@ function handleKeyDown(event) {
     if (!gameStarted) return; // Do nothing if the game hasn't started yet
     const pressedKey = parseInt(event.key);
     if (!isNaN(pressedKey) && pressedKey === currentNumber) {
-    clearInterval(timer); // Clear previous timer
-    score++;
-    updateScore();
-    document.getElementById('number').classList.add('correct'); // Add 'correct' class for animation
-    setTimeout(() => {
-        document.getElementById('number').classList.remove('correct'); // Remove 'correct' class after animation
-        if (timeLimit >= 1800) {
-        timeLimit -= 100; // Reset time limit
-        } else {
-        timeLimit = 1800;
-        }
-        displayNewNumber(); // Display new number
-    }, 200);
+        clearInterval(timer); // Clear previous timer
+        score++;
+        updateScore();
+        document.getElementById('number').classList.add('correct'); // Add 'correct' class for animation
+        setTimeout(() => {
+            document.getElementById('number').classList.remove('correct'); // Remove 'correct' class after animation
+            if (timeLimit >= 1800) {
+                timeLimit -= 100; // Reset time limit
+            } else {
+                timeLimit = 1800;
+            }
+            displayNewNumber(); // Display new number
+        }, 200);
     } else {
-    gameOverHandler('wrongNumber');
+        gameOverHandler('wrongNumber');
     }
 }
 
@@ -60,10 +60,12 @@ function gameOverHandler(reason) {
     clearInterval(timer); // Clear timer
     document.removeEventListener('keydown', handleKeyDown);
     if (reason === 'tooSlow') {
-    document.getElementById('message').textContent = 'Too slow! Your final score: ' + score;
+
+        document.getElementById('message').textContent = 'Too slow! Your final score: ' + score;
     } else if (reason === 'wrongNumber') {
-    document.getElementById('message').textContent = 'Wrong number! Your final score: ' + score;
+        document.getElementById('message').textContent = 'Wrong number! Your final score: ' + score;
     }
+    saveHighscore()
     document.getElementById('restartButton').style.display = 'inline';
 
 }
