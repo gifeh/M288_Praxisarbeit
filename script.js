@@ -65,8 +65,7 @@ function gameOverHandler(reason) {
     } else if (reason === 'wrongNumber') {
         document.getElementById('message').textContent = 'Wrong number! Your final score: ' + score;
     }
-    saveHighscore()
-    document.getElementById('restartButton').style.display = 'inline';
+    updateHighScore(score);
 
 }
 

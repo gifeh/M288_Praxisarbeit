@@ -85,7 +85,7 @@ echo "<p>Highscore: $currentUserHighscore</p>";
   
   <script src="/assets/scripts/script.js"></script>
   <script>
-    function updateHichScore() {
+    function updateHighscore() {
       const score = document.getElementById('score').textContent.replace('Score: ', '');
       // Send score to game.php for updating highscore
       fetch('game.php', {
@@ -97,7 +97,7 @@ echo "<p>Highscore: $currentUserHighscore</p>";
       });
     };
     document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('restartButton').addEventListener('click', updateHichScore, false);
+      document.getElementById('restartButton').addEventListener('click', updateHighscore, false);
     });
   </script>
 </body>
