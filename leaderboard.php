@@ -13,7 +13,7 @@ try {
 
 // Funktion zur Abfrage des Leaderboards aus der Datenbank
 function getLeaderboard($db) {
-    $stmt = $db->query('SELECT userName, userScore, date FROM leaderboard ORDER BY userScore DESC');
+    $stmt = $db->query('SELECT userName, userScore, date FROM leaderboard ORDER BY userScore DESC, date DESC');
     $leaderboard = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $leaderboard;
 }
@@ -56,4 +56,3 @@ $leaderboard = getLeaderboard($db);
   </div>
 </body>
 </html>
-
