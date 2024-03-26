@@ -37,6 +37,26 @@ function getUserNames($db) {
 
 // Abmeldung des Benutzers, wenn er auf index.php zurückkommt
 unset($_SESSION['userName']);
+
+
+function updateLeaderboard($db, $userName, $score) {
+    // Zuerst den aktuellen Highscore des Benutzers abrufen
+    $stmt = $db->prepare('SELECT userScore FROM leaderboard WHERE userName = :name');
+    $stmt->bindParam(':name', $userName);
+    $stmt->execute();
+    $currentScore = $stmt->fetchColumn();
+
+    // Überprüfen, ob der neue Score größer ist als der aktuelle Highscore
+    if ($score > $currentScore) {
+        // Wenn ja, aktualisieren Sie den Highscore des Benutzers in der Datenbank
+        $stmt = $db->prepare('UPDATE leaderboard SET userScore = :score, date = NOW() WHERE userName = :name');
+        $stmt->bindParam(':name', $userName);
+        $stmt->bindParam(':score', $score);
+        $stmt->execute();
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
