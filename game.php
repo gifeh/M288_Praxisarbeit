@@ -66,10 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['score'])) {
 </head>
 <body>
   <div class="game-container">
-    <?php
-    echo "<p>Angemeldeter Benutzer: $currentUserName</p>";
-    echo "<p>Highscore: $currentUserHighscore</p>";
-    ?>
+    <div class="user-and-highscore">
+      <?php
+      echo "<p>Angemeldeter Benutzer: $currentUserName</p>";
+      echo "<p>Highscore: $currentUserHighscore</p>";
+      ?>
+    </div>
     <h1>Number Game</h1>
     <p>Klicke die angezeigte Nummer!</p>
     <div id="score">Score: 0</div>

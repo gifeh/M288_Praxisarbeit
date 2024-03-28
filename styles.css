@@ -47,7 +47,7 @@ margin: 0 auto;
 
 #smartphoneInput button {
   width: 32.5%;
-  height: 171px;
+  height: 131px;
   border-radius: 5px;
   margin-right: 10px;
   margin-left: 10px;
@@ -73,13 +73,14 @@ margin: 0 auto;
   left: 1px;
   right: 1px;
   padding: 5px;
-  height: 180px;
+  height: 140px;
 }
 
 @media screen and (min-width: 1025px) {
   #smartphoneInput {
     display: none;
   }
+
 }
 
 @media screen and (max-width: 1025px) {
@@ -96,6 +97,10 @@ margin: 0 auto;
   th, td{
     padding: 8px 8px !important;
   }
+  .user-and-highscore{
+    display: none;
+  }
+  
 }
 
 
