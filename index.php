@@ -57,8 +57,8 @@ unset($_SESSION['userName']);
 <body>
   <h1>Number Game</h1>
   <?php if(isset($errorMessage)) echo "<p>$errorMessage</p>"; ?>
+  <label for="userName">Melde dich an</label>
   <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="userName">Select your username:</label>
     <select name="userName" id="userName" style="width: 200px; height: 30px;">
         <?php
         $userNames = getUserNames($db);
@@ -67,7 +67,7 @@ unset($_SESSION['userName']);
         }
         ?>
     </select>
-    <button type="submit">Login</button>
+    <button id="loginButton" type="submit">Login</button>
   </form>
 </body>
 </html>

@@ -6,6 +6,8 @@ body {
   padding: 15px;
   overflow-x: hidden; /* Add this line */
   font-size: 16pt;
+  align-items: center;
+
 }
 
 p{
@@ -41,19 +43,10 @@ justify-content: center;
 width: max-content;
 margin: 0 auto;
 }
-#smartphoneInput button {
-width: 32%;
-height: 180px;
-border-radius: 5px;
-margin-right: 10px;
-margin-left: 10px;
-padding: 7px;
-border-color: #95Cf11;
-border-width: 3px;
-}
+
 
 #smartphoneInput button {
-  width: 32%;
+  width: 32.5%;
   height: 171px;
   border-radius: 5px;
   margin-right: 10px;
@@ -79,8 +72,30 @@ border-width: 3px;
   justify-content: space-between;
   left: 1px;
   right: 1px;
-  padding: 8px;
+  padding: 5px;
   height: 180px;
+}
+
+@media screen and (min-width: 1025px) {
+  #smartphoneInput {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  th{
+    font-size: 12pt;
+  }
+  td{
+    font-size: 9.5pt;
+  }
+  table{
+    width: 40%;
+
+  }
+  th, td{
+    padding: 8px 8px !important;
+  }
 }
 
 
@@ -113,8 +128,8 @@ td {
 }
 
 .leaderboard-container {
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -126,6 +141,28 @@ td {
   height: fit-content;
   padding: 7px;
   width: 140px;
+  border-color: #95Cf11;
+  border-width: 3px;
+}
+
+select{
+  border-radius: 5px;
+  border-color: #95Cf11;
+  border-width: 3px;
+  font-size: 16pt;
+  margin: 7px;
+}
+
+
+form{
+  margin-top: 20px;
+  gap: 20px;
+}
+
+#loginButton{
+  border-radius: 5px;
+  height: fit-content;
+  padding: 7px;
   border-color: #95Cf11;
   border-width: 3px;
 }

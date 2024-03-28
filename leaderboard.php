@@ -33,6 +33,7 @@ $leaderboard = getLeaderboard($db);
 <body>
   <h1>Leaderboard</h1>
   <div class="leaderboard-container">
+    
     <table>
       <tr>
         <th>Rank</th>
