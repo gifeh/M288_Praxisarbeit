@@ -61,9 +61,9 @@ function gameOverHandler(reason) {
     document.removeEventListener('keydown', handleKeyDown);
     if (reason === 'tooSlow') {
 
-        document.getElementById('message').textContent = 'Too slow! Your final score: ' + score;
+        document.getElementById('message').textContent = 'Zu langsam! Finaler Scor: ' + score;
     } else if (reason === 'wrongNumber') {
-        document.getElementById('message').textContent = 'Wrong number! Your final score: ' + score;
+        document.getElementById('message').textContent = 'Falsche Zahl! Finaler Scor: ' + score;
     }
     updateHighscore()
     document.getElementById('restartButton').style.display = 'inline';

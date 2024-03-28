@@ -88,7 +88,7 @@ margin: 0 auto;
     font-size: 12pt;
   }
   td{
-    font-size: 9.5pt;
+    font-size: 8.5pt;
   }
   table{
     width: 40%;
@@ -100,7 +100,14 @@ margin: 0 auto;
   .user-and-highscore{
     display: none;
   }
-  
+  h1{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #number{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 }
 
 
