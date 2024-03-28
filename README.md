@@ -24,3 +24,21 @@ Joki konnte uns aber erneut viel helfen, was uns dann etwas weiter führte.
 22.03.
 In der Zwischenzeit haben wir unsere Datenbank zum laufen gebracht. Jedoch hatten wir noch einige Fehler die wir heute mit Joki beheben konnten.
 Mit noch etwas Arbeit sind wir dann fix fertig mit unserem Spiel.
+
+Testing Cases:
+
+
+Login-Button funktioniert?
+Der Button funktioniert einwandfrei.
+
+Man kann seinen Benutzer auswählen?
+Ja, jeder LP aus LG22&LG23 kann sich anmelden.
+
+Der Score funktioniert?
+Der Score funktioniert ohne Probleme.
+
+Die Zahlen wechseln sich ab?
+Ja.
+
+Das Leaderboard funktioniert?
+Ja man kann seine mitschüler sehen.
