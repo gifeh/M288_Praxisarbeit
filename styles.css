@@ -163,6 +163,7 @@ select{
   border-width: 3px;
   font-size: 16pt;
   margin: 7px;
+  color: black;
 }
 
 
@@ -177,4 +178,8 @@ form{
   padding: 7px;
   border-color: #95Cf11;
   border-width: 3px;
+}
+
+button{
+  black
 }
