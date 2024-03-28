@@ -1,12 +1,3 @@
-CREATE TABLE IF NOT EXISTS `m288_Praxisarbeit`.`Leader Board` (
-  `userId` INT NOT NULL AUTO_INCREMENT,
-  `userName` VARCHAR(45) NOT NULL,
-  `userScore` INT NOT NULL,
-  `datum` DATE NOT NULL,
-  PRIMARY KEY (`userId`))
-ENGINE = InnoDB;
-
-
 
 
 

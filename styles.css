@@ -2,13 +2,20 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   max-height: 100vh;
-  position: relative;
   margin: 0px;
   padding: 15px;
   overflow-x: hidden; /* Add this line */
-  display: grid;
-  grid-template-rows: auto 6fr;
+  font-size: 16pt;
 }
+
+p{
+  margin-top: 21px;
+  margin-bottom: 21px;
+}
+.game-container{
+height: auto;
+}
+
 #number {
 font-size: 130px;
 margin-top: 50px;
@@ -17,32 +24,69 @@ transition: transform 0.2s ease;
 }
 #number.correct {
 transform: scale(1.2);
+color: #95Cf11;
 }
 #message {
 font-size: 24px;
-margin-top: 20px;
+
 }
+
+.message-container{
+  height: 50px;
+}
+
 .button-container {
 margin-top: 20px;
 justify-content: center;
 width: max-content;
 margin: 0 auto;
-
 }
 #smartphoneInput button {
 width: 32%;
-height: fit-content;
-
+height: 180px;
+border-radius: 5px;
+margin-right: 10px;
+margin-left: 10px;
+padding: 7px;
+border-color: #95Cf11;
+border-width: 3px;
 }
+
+#smartphoneInput button {
+  width: 32%;
+  height: 171px;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 7px;
+  background-color: #95Cf11;
+  color: white;
+  font-size: 40pt;
+  box-shadow: 0 9px #666;
+  }
+
+
+  #smartphoneInput button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+    }
 
 #smartphoneInput {
-
-  width: 100%;
+  width: auto;
+  position: absolute;
+  bottom: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  left: 1px;
+  right: 1px;
+  padding: 8px;
+  height: 180px;
 }
 
 
+button{
+  font-size: 16pt;
+}
 
 
 h1 {
@@ -50,7 +94,7 @@ h1 {
 }
 
 table {
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
   border-collapse: collapse;
 }
@@ -75,3 +119,13 @@ td {
   white-space: nowrap;
 }
 
+#startButton, #restartButton, #leaderboardButton{
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+  height: fit-content;
+  padding: 7px;
+  width: 140px;
+  border-color: #95Cf11;
+  border-width: 3px;
+}

@@ -53,8 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['score'])) {
 }
 
 // Ausgabe des Benutzernamens und des Highscores
-echo "<p>Angemeldeter Benutzer: $currentUserName</p>";
-echo "<p>Highscore: $currentUserHighscore</p>";
+
 ?>
 
 <!DOCTYPE html>
@@ -66,17 +65,26 @@ echo "<p>Highscore: $currentUserHighscore</p>";
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Number Game</h1>
-  <p>Press the corresponding number key to continue.</p>
-  <div id="score">Score: 0</div>
-  <div id="timer" style="display: none;">Time left: 4.0</div>
-  <div id="number">?</div>
-  <div id="message"></div>
-  <div class="button-container">
-    <button id="startButton">Start</button>
-    <button id="restartButton" style="display: none;">Restart</button>
-    <button id="leaderboardButton" onclick="location.href='leaderboard.php';">Leaderboard</button>
+  <div class="game-container">
+    <?php
+    echo "<p>Angemeldeter Benutzer: $currentUserName</p>";
+    echo "<p>Highscore: $currentUserHighscore</p>";
+    ?>
+    <h1>Number Game</h1>
+    <p>Klicke die angezeigte Nummer!</p>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time left: 4.0</div>
+    <div id="number">?</div>
+    <div class="message-container">
+      <div id="message"></div>
+    </div>
+    <div class="button-container">
+      <button id="startButton">Start</button>
+      <button id="restartButton" style="display: none;">Restart</button>
+      <button id="leaderboardButton" onclick="location.href='leaderboard.php';">Leaderboard</button>
+    </div>
   </div>
+
   <div class="button-container" id="smartphoneInput">
     <button id="numberButton1">1</button>
     <button id="numberButton2">2</button>
