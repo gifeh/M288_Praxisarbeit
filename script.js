@@ -120,10 +120,10 @@ function handleButtonClick(pressedKey) {
         document.getElementById('number').classList.add('correct'); // Add 'correct' class for animation
         setTimeout(() => {
             document.getElementById('number').classList.remove('correct'); // Remove 'correct' class after animation
-            if (timeLimit >= 1800) {
-                timeLimit -= 100; // Reset time limit
+            if (timeLimit >= 1200) {
+                timeLimit -= 50; // Reset time limit
             } else {
-                timeLimit = 1800;
+                timeLimit = 1200;
             }
             displayNewNumber(); // Display new number
         }, 200);
