@@ -37,17 +37,21 @@ $leaderboard = getLeaderboard($db);
       <tr>
         <th>Rank</th>
         <th>User</th>
-        <th>Score</th>
-        <th>Date</th>
+        <th>Highscore</th>
+        <th>Datum</th>
       </tr>
       <?php
       $rank = 1;
       foreach ($leaderboard as $row) {
+          // Konvertiere das Datum in das gewünschte Format
+          $date = new DateTime($row['date']);
+          $formattedDate = $date->format('d. m. Y'); // Format: Tag. Monat. Jahr
+
           echo "<tr>";
           echo "<td>{$rank}</td>";
           echo "<td>{$row['userName']}</td>";
           echo "<td>{$row['userScore']}</td>";
-          echo "<td>{$row['date']}</td>";
+          echo "<td>{$formattedDate}</td>"; // Geänderte Zeile
           echo "</tr>";
           $rank++;
       }

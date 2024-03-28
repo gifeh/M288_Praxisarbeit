@@ -63,7 +63,7 @@ echo "<p>Highscore: $currentUserHighscore</p>";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Number Game</title>
-  <link rel="stylesheet" href="/assets/style/styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <h1>Number Game</h1>
@@ -83,19 +83,9 @@ echo "<p>Highscore: $currentUserHighscore</p>";
     <button id="numberButton3">3</button>
   </div>
   
-  <script src="/assets/scripts/script.js"></script>
+  <script src="/script.js"></script>
   <script>
-    function updateHighscore() {
-      const score = document.getElementById('score').textContent.replace('Score: ', '');
-      // Send score to game.php for updating highscore
-      fetch('game.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'score=' + score
-      });
-    };
+    
     document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('restartButton').addEventListener('click', updateHighscore, false);
     });

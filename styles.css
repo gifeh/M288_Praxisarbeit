@@ -1,32 +1,49 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  max-height: 100vh;
+  position: relative;
+  margin: 0px;
+  padding: 15px;
+  overflow-x: hidden; /* Add this line */
+  display: grid;
+  grid-template-rows: auto 6fr;
 }
 #number {
-  font-size: 130px;
-  margin-top: 50px;
-  margin-bottom: 40px;
-  transition: transform 0.2s ease;
+font-size: 130px;
+margin-top: 50px;
+margin-bottom: 40px;
+transition: transform 0.2s ease;
 }
 #number.correct {
-  transform: scale(1.2);
+transform: scale(1.2);
 }
 #message {
-  font-size: 24px;
-  margin-top: 20px;
+font-size: 24px;
+margin-top: 20px;
 }
 .button-container {
-  margin-top: 20px;
-  justify-content: center;
+margin-top: 20px;
+justify-content: center;
+width: max-content;
+margin: 0 auto;
+
 }
-.button-container button {
-  margin: 0 10px;
+#smartphoneInput button {
+width: 32%;
+height: fit-content;
+
 }
 
 #smartphoneInput {
+
+  width: 100%;
+  display: flex;
   justify-content: space-around;
-  gap: 300px;
 }
+
+
+
 
 h1 {
   text-align: center;
@@ -58,4 +75,3 @@ td {
   white-space: nowrap;
 }
 
-/*hsbxhsxb

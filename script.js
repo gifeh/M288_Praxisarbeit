@@ -65,26 +65,20 @@ function gameOverHandler(reason) {
     } else if (reason === 'wrongNumber') {
         document.getElementById('message').textContent = 'Wrong number! Your final score: ' + score;
     }
-    updateHighscore(score);
-
+    updateHighscore()
+    document.getElementById('restartButton').style.display = 'inline';
 }
-
-
-function callUpdateHighscore() {
-    $.ajax({
-        url: 'game.php',
-        type: 'post',
-        data: { action: 'updateHighscore' }, // Zusätzliche Daten, falls benötigt
-        success: function(response) {
-            // Hier kannst du die Antwort verarbeiten, falls benötigt
-            console.log('Highscore erfolgreich aktualisiert');
+function updateHighscore() {
+    const score = document.getElementById('score').textContent.replace('Score: ', '');
+    // Send score to game.php for updating highscore
+    fetch('game.php', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
         },
-        error: function(xhr, status, error) {
-            // Hier kannst du Fehlerhandhabung implementieren, falls benötigt
-            console.error('Fehler beim Aktualisieren des Highscores:', error);
-        }
+        body: 'score=' + score
     });
-}
+};
 
 
 function updateScore() {
